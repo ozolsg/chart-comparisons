@@ -36,7 +36,7 @@ function VisxChart({ dataPoints, lines }) {
         domain: [0, dataPoints - 1],
         range: [margin.left, width - margin.right],
       }),
-    [dataPoints, width]
+    [dataPoints, width, margin.left, margin.right]
   );
 
   const yScale = useMemo(

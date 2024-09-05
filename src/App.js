@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import ChartJSChart from './Charts/ChartJS';
 import EChartsComponent from './Charts/ECharts';
 import HighchartsComponent from './Charts/HighCharts';
@@ -17,7 +17,7 @@ function App() {
   const [library, setLibrary] = useState('financial');
 
   // State to hold Pluses and Minuses for each chart
-  const [feedback, setFeedback] = useState({
+  const feedback = {
     plotly: [
       {
         plus: 'Interactive features (zoom in and out with mouse)',
@@ -162,7 +162,7 @@ function App() {
         minus: '-',
       },
     ],
-  });
+  };
 
   // Set the feedback based on the selected library
   const currentFeedback = feedback[library] || [];

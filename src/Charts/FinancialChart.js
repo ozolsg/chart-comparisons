@@ -21,10 +21,7 @@ import {
   MouseCoordinateX,
   MouseCoordinateY,
   ZoomButtons,
-  withDeviceRatio,
-  withSize,
 } from 'react-financial-charts';
-import { scaleLinear } from 'd3-scale';
 import { format } from 'd3-format';
 import { timeFormat } from 'd3-time-format';
 import { initialData } from './utils/financialData';
@@ -72,7 +69,6 @@ const FinancialLineChart = ({ dataPoints, lines }) => {
 
   const elder = elderRay();
 
-  const calculatedData = elder(ema26(ema12(generateData(dataPoints))));
   const { data, xScale, xAccessor, displayXAccessor } = ScaleProvider(data1);
   const pricesDisplayFormat = format('.2f');
   const max = xAccessor(data[data.length - 1]);
@@ -86,9 +82,7 @@ const FinancialLineChart = ({ dataPoints, lines }) => {
   const barChartHeight = gridHeight / 4;
   const barChartOrigin = (_, h) => [0, h - barChartHeight - elderRayHeight];
   const chartHeight = gridHeight - elderRayHeight;
-  const yExtents = (data) => {
-    return [data.high, data.low];
-  };
+
   const dateTimeFormat = '%d %b';
   const timeDisplayFormat = timeFormat(dateTimeFormat);
 
@@ -221,5 +215,4 @@ const FinancialLineChart = ({ dataPoints, lines }) => {
   );
 };
 
-// Export the component
 export default FinancialLineChart;

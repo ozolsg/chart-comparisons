@@ -14,7 +14,7 @@ import PaidChart from './Charts/PaidChart';
 function App() {
   const [dataPoints, setDataPoints] = useState(100);
   const [lines, setLines] = useState(2);
-  const [library, setLibrary] = useState('financial');
+  const [library, setLibrary] = useState('plotly');
 
   // State to hold Pluses and Minuses for each chart
   const feedback = {
@@ -41,21 +41,21 @@ function App() {
         minus: '',
       },
       {
-        plus: 'Maintained (4M/M downloads, 8 days ago released)',
+        plus: 'Maintained (8 days ago released)',
         minus: '',
       },
     ],
     echarts: [
       {
         plus: 'Fast performance (renderer can be switched to canvas/svg), 1mb bundle size',
-        minus: 'China',
+        minus: 'China, but Apache (US non-profit)',
       },
       {
         plus: 'Date range slider below graph',
         minus: 'Have to create integration with React ourselves',
       },
       {
-        plus: 'Maintained library (Last release - 2months)',
+        plus: 'Maintained library (4M/M downloads, Last release - 2months)',
         minus: '',
       },
       {

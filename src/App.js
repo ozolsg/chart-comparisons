@@ -21,18 +21,45 @@ function App() {
     plotly: [
       {
         plus: 'Interactive features (zoom in and out with mouse)',
-        minus: 'Dont think we can combine multiple graphs',
+        minus: '6mb unminified to 2mb minified bundle (finance 2mb -> 1mb)',
       },
       {
-        plus: 'Wide choice of graphs - maps, 2D/3D graphs ',
-        minus: '',
+        plus: 'Wide choice of graphs - candle, maps, 2D/3D graphs',
+        minus:
+          'Data structure is in arrays (transformation could impact performance)',
       },
       {
-        plus: 'Performant',
-        minus: '',
+        plus: 'Detailed documentation',
+        minus: 'SVG format',
       },
       {
         plus: 'Slider',
+        minus: '',
+      },
+      {
+        plus: 'Renderer can be switched to canvas/svg',
+        minus: '',
+      },
+      {
+        plus: 'Maintained (4M/M downloads, 8 days ago released)',
+        minus: '',
+      },
+    ],
+    echarts: [
+      {
+        plus: 'Fast performance (renderer can be switched to canvas/svg), 1mb bundle size',
+        minus: 'China',
+      },
+      {
+        plus: 'Date range slider below graph',
+        minus: 'Have to create integration with React ourselves',
+      },
+      {
+        plus: 'Maintained library (Last release - 2months)',
+        minus: '',
+      },
+      {
+        plus: 'Zoom ins with mouse clicks available',
         minus: '',
       },
     ],
@@ -46,28 +73,14 @@ function App() {
         minus: 'Bad performance for 10k+ data points',
       },
     ],
-    echarts: [
-      {
-        plus: 'Fast performance',
-        minus: '',
-      },
-      {
-        plus: 'Date range slider below graph',
-        minus: '',
-      },
-      {
-        plus: 'Tooltips and crosshairs',
-        minus: '',
-      },
-    ],
     financial: [
       {
         plus: 'Specifically designed for financial data visualization',
-        minus: '',
+        minus: 'Not maintained for a year',
       },
       {
         plus: 'Most performant',
-        minus: '',
+        minus: 'Not zooming on the exact bar',
       },
       {
         plus: 'Multiple graphs into one',
@@ -108,7 +121,7 @@ function App() {
     vega: [
       {
         plus: '',
-        minus: 'Bad performance for 10k+ data points',
+        minus: 'Good performance',
       },
       {
         plus: '',
@@ -337,20 +350,20 @@ function App() {
           <button
             style={{
               backgroundColor:
-                library === 'financial' ? 'lightgreen' : 'transparent',
-            }}
-            onClick={() => setLibrary('financial')}
-          >
-            Financial
-          </button>
-          <button
-            style={{
-              backgroundColor:
                 library === 'echarts' ? 'lightgreen' : 'transparent',
             }}
             onClick={() => setLibrary('echarts')}
           >
             ECharts
+          </button>
+          <button
+            style={{
+              backgroundColor:
+                library === 'plotly' ? 'lightgreen' : 'transparent',
+            }}
+            onClick={() => setLibrary('plotly')}
+          >
+            Plotly.js
           </button>
           <button
             style={{
@@ -364,11 +377,11 @@ function App() {
           <button
             style={{
               backgroundColor:
-                library === 'plotly' ? 'lightgreen' : 'transparent',
+                library === 'financial' ? 'lightgreen' : 'transparent',
             }}
-            onClick={() => setLibrary('plotly')}
+            onClick={() => setLibrary('financial')}
           >
-            Plotly.js
+            Financial
           </button>
           <button
             style={{

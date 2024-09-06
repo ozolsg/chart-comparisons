@@ -63,7 +63,7 @@ function EChartsComponent({ dataPoints, lines }) {
   }, [dataPoints, lines]);
 
   return (
-    <div style={{ width: '600px', height: '400px' }}>
+    <div style={{ width: '900px', height: '600px' }}>
       <ReactECharts option={option} style={{ width: '100%', height: '100%' }} />
     </div>
   );

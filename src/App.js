@@ -35,7 +35,7 @@ function App() {
       {
         plus: 'Renderer can be switched to canvas/svg',
         minus:
-          'Not everything can be achieved in JS library, Python very powerful',
+          'Not everything can be achieved in JS library',
       },
       {
         plus: 'Maintained (8 days ago released)',

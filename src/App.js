@@ -14,7 +14,7 @@ import PaidChart from './Charts/PaidChart';
 function App() {
   const [dataPoints, setDataPoints] = useState(100);
   const [lines, setLines] = useState(2);
-  const [library, setLibrary] = useState('plotly');
+  const [library, setLibrary] = useState('echarts');
 
   // State to hold Pluses and Minuses for each chart
   const feedback = {
@@ -33,12 +33,9 @@ function App() {
         minus: 'SVG format',
       },
       {
-        plus: 'Slider',
-        minus: '',
-      },
-      {
         plus: 'Renderer can be switched to canvas/svg',
-        minus: '',
+        minus:
+          'Not everything can be achieved in JS library, Python very powerful',
       },
       {
         plus: 'Maintained (8 days ago released)',
@@ -48,18 +45,18 @@ function App() {
     echarts: [
       {
         plus: 'Fast performance (renderer can be switched to canvas/svg), 1mb bundle size',
-        minus: 'China, but Apache (US non-profit)',
+        minus: 'Have to create integration with React ourselves',
       },
       {
         plus: 'Date range slider below graph',
-        minus: 'Have to create integration with React ourselves',
+        minus: '',
       },
       {
         plus: 'Maintained library (4M/M downloads, Last release - 2months)',
         minus: '',
       },
       {
-        plus: 'Zoom ins with mouse clicks available',
+        plus: 'Zoom ins',
         minus: '',
       },
     ],

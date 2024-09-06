@@ -32,9 +32,25 @@ function EChartsComponent({ dataPoints, lines }) {
         appendToBody: true,
         textStyle: { fontSize: 12 },
       },
+      toolbox: {
+        left: 'center',
+        itemSize: 20,
+        top: 10,
+        feature: {
+          dataZoom: {
+            yAxisIndex: 'none',
+          },
+          restore: {},
+        },
+      },
       dataZoom: [
         { type: 'slider', orient: 'horizontal', filterMode: 'none' },
-        { type: 'inside', orient: 'horizontal', filterMode: 'none' },
+        {
+          type: 'inside',
+          orient: 'horizontal',
+          filterMode: 'none',
+          throttle: 100,
+        },
       ],
       series,
     };

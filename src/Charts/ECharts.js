@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ReactECharts from 'echarts-for-react';
 
 function EChartsComponent({ dataPoints, lines }) {
   const [option, setOption] = useState({});
+  const intervalRef = useRef(null); // To store interval ID for live updates
 
-  const generateData = () => {
+  const generateInitialData = () => {
     const series = [];
     for (let i = 0; i < lines; i++) {
       const data = [];
@@ -17,7 +18,32 @@ function EChartsComponent({ dataPoints, lines }) {
         data,
       });
     }
-    return {
+    return series;
+  };
+
+  const updateLiveData = () => {
+    setOption((prevOption) => {
+      const newSeries = prevOption.series.map((series) => ({
+        ...series,
+        data: [...series.data, Math.random() * 100].slice(-dataPoints), // Add new data point and remove old ones
+      }));
+
+      const newXAxis = {
+        ...prevOption.xAxis,
+        data: [
+          ...prevOption.xAxis.data,
+          prevOption.xAxis.data.length + 1,
+        ].slice(-dataPoints), // Update x-axis
+      };
+
+      return { ...prevOption, series: newSeries, xAxis: newXAxis };
+    });
+  };
+
+  useEffect(() => {
+    // Generate the initial chart data
+    const initialSeries = generateInitialData();
+    setOption({
       xAxis: {
         type: 'category',
         data: Array.from({ length: dataPoints }, (_, i) => i + 1),
@@ -25,41 +51,14 @@ function EChartsComponent({ dataPoints, lines }) {
       yAxis: {
         type: 'value',
       },
-      tooltip: {
-        trigger: 'axis',
-        showCross: true,
-        axisPointer: { type: 'cross', label: {} },
-        appendToBody: true,
-        textStyle: { fontSize: 12 },
-      },
-      toolbox: {
-        left: 'center',
-        itemSize: 20,
-        top: 10,
-        feature: {
-          dataZoom: {
-            yAxisIndex: 'none',
-          },
-          restore: {},
-        },
-      },
-      dataZoom: [
-        { type: 'slider', orient: 'horizontal', filterMode: 'none' },
-        {
-          type: 'inside',
-          orient: 'horizontal',
-          filterMode: 'none',
-          throttle: 100,
-        },
-      ],
-      series,
-    };
-  };
+      series: initialSeries,
+    });
 
-  useEffect(() => {
-    // Generate the chart data
-    const chartOption = generateData();
-    setOption(chartOption);
+    // Set an interval to update the data points live every 1 second
+    intervalRef.current = setInterval(updateLiveData, 1000);
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalRef.current);
   }, [dataPoints, lines]);
 
   return (

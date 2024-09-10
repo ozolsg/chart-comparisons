@@ -11,11 +11,12 @@ import VegaLineChart from './Charts/VegaChart';
 import NivoLineChart from './Charts/NivoChart';
 import PaidChart from './Charts/PaidChart';
 import LightweightChartsComponent from './Charts/TradingView';
+import DXChartComponent from './Charts/DevExperts';
 
 function App() {
   const [dataPoints, setDataPoints] = useState(100);
   const [lines, setLines] = useState(1);
-  const [library, setLibrary] = useState('echarts');
+  const [library, setLibrary] = useState('dxcharts');
 
   // State to hold Pluses and Minuses for each chart
   const feedback = {
@@ -185,6 +186,8 @@ function App() {
 
   const renderChart = () => {
     switch (library) {
+      case 'dxcharts':
+        return <DXChartComponent dataPoints={dataPoints} lines={lines} />;
       case 'plotly':
         return <PlotlyChart dataPoints={dataPoints} lines={lines} />;
       case 'lightweight':
@@ -354,6 +357,15 @@ function App() {
             flexWrap: 'wrap',
           }}
         >
+          <button
+            style={{
+              backgroundColor:
+                library === 'dxcharts' ? 'lightgreen' : 'transparent',
+            }}
+            onClick={() => setLibrary('dxcharts')}
+          >
+            DXCharts
+          </button>
           <button
             style={{
               backgroundColor:

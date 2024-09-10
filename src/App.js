@@ -10,10 +10,11 @@ import ApexChart from './Charts/ApexChart';
 import VegaLineChart from './Charts/VegaChart';
 import NivoLineChart from './Charts/NivoChart';
 import PaidChart from './Charts/PaidChart';
+import LightweightChartsComponent from './Charts/TradingView';
 
 function App() {
   const [dataPoints, setDataPoints] = useState(100);
-  const [lines, setLines] = useState(2);
+  const [lines, setLines] = useState(1);
   const [library, setLibrary] = useState('echarts');
 
   // State to hold Pluses and Minuses for each chart
@@ -34,8 +35,7 @@ function App() {
       },
       {
         plus: 'Renderer can be switched to canvas/svg',
-        minus:
-          'Not everything can be achieved in JS library',
+        minus: 'Not everything can be achieved in JS library',
       },
       {
         plus: 'Maintained (8 days ago released)',
@@ -57,6 +57,12 @@ function App() {
       },
       {
         plus: 'Zoom ins',
+        minus: '',
+      },
+    ],
+    lightweight: [
+      {
+        plus: '',
         minus: '',
       },
     ],
@@ -181,6 +187,10 @@ function App() {
     switch (library) {
       case 'plotly':
         return <PlotlyChart dataPoints={dataPoints} lines={lines} />;
+      case 'lightweight':
+        return (
+          <LightweightChartsComponent dataPoints={dataPoints} lines={lines} />
+        );
       case 'chartjs':
         return <ChartJSChart dataPoints={dataPoints} lines={lines} />;
       case 'echarts':
@@ -374,9 +384,19 @@ function App() {
           <button
             style={{
               backgroundColor:
+                library === 'lightweight' ? 'lightgreen' : 'transparent',
+            }}
+            onClick={() => setLibrary('lightweight')}
+          >
+            TradingView Lightweight
+          </button>
+          {/* <button
+            style={{
+              backgroundColor:
                 library === 'financial' ? 'lightgreen' : 'transparent',
             }}
             onClick={() => setLibrary('financial')}
+            disabled
           >
             Financial
           </button>
@@ -386,6 +406,7 @@ function App() {
                 library === 'visx' ? 'lightgreen' : 'transparent',
             }}
             onClick={() => setLibrary('visx')}
+            disabled
           >
             Visx
           </button>
@@ -395,6 +416,7 @@ function App() {
                 library === 'chartjs' ? 'lightgreen' : 'transparent',
             }}
             onClick={() => setLibrary('chartjs')}
+            disabled
           >
             Chart.js
           </button>
@@ -404,6 +426,7 @@ function App() {
                 library === 'rechart' ? 'lightgreen' : 'transparent',
             }}
             onClick={() => setLibrary('rechart')}
+            disabled
           >
             Rechart
           </button>
@@ -413,6 +436,7 @@ function App() {
                 library === 'nivo' ? 'lightgreen' : 'transparent',
             }}
             onClick={() => setLibrary('nivo')}
+            disabled
           >
             Nivo
           </button>
@@ -422,6 +446,7 @@ function App() {
                 library === 'vega' ? 'lightgreen' : 'transparent',
             }}
             onClick={() => setLibrary('vega')}
+            disabled
           >
             Vega
           </button>
@@ -431,9 +456,10 @@ function App() {
                 library === 'highcharts' ? 'lightgreen' : 'transparent',
             }}
             onClick={() => setLibrary('highcharts')}
+            disabled
           >
             Highcharts (paid)
-          </button>
+          </button> */}
           <button
             style={{
               backgroundColor:
